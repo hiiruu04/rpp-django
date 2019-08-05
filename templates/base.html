@@ -6,13 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Subsistem 3</title>
-    <link rel="stylesheet" type="text/css" href={% static 'css/semantic.min.css' %}>
-    <script
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
-    <script src={% static 'js/semantic.min.js' %}></script>
-    {% comment %} <script src={% static %}></script> {% endcomment %}
+    {% block script %}
+        {% include 'script.html' %}
+    {% endblock script %}
 </head>
 <body>
     <div class="ui top attached demo menu">

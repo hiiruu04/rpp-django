@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ULB',
     'random_forest',
+    'frontend'
 ]
 
 MIDDLEWARE = [

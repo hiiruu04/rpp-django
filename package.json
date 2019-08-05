@@ -1,0 +1,47 @@
+{
+  "name": "rpp-django",
+  "version": "1.0.0",
+  "description": "django-react-rpp",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development --watch ./frontend/src/index.js --output ./frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./frontend/src/index.js --output ./frontend/static/frontend/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiiruu04/rpp-django.git"
+  },
+  "author": "hilman, demas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hiiruu04/rpp-django/issues"
+  },
+  "homepage": "https://github.com/hiiruu04/rpp-django#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6"
+  },
+  "dependencies": {
+    "@date-io/date-fns": "^1.3.8",
+    "@material-ui/core": "^4.2.0",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/pickers": "^3.1.2",
+    "date-fns": "^2.0.0-beta.2",
+    "event-emitter": "^0.3.5",
+    "material-table": "^1.40.1",
+    "notistack": "^0.8.8",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "readline": "^1.3.0",
+    "recharts": "^1.6.2",
+    "reconnecting-websocket": "^4.1.10",
+    "serve": "^11.1.0"
+  }
+}

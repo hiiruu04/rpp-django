@@ -10,3 +10,4 @@ env/
 requirements2.txt
 media/
 Procfile
+node_modules/

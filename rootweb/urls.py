@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ML/', include('random_forest.urls', namespace='rf')),
     url(r'^ulb/', include('ULB.urls')),
+    url(r'^dashboard/', include('frontend.urls')),
     path('ML/home/', views.index, name='home-rf'),
     path('IF/home/', views.indexIF, name='home-if'),
     url(r'^datatests/', views.DatasetListView.as_view(), name='datatest-view'),
