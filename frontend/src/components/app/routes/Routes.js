@@ -18,7 +18,6 @@ class Routes extends React.Component {
           component={ Dashboard }
         />
         <Route
-          exact
           path='/recap/'
           component={ Recap }
         />

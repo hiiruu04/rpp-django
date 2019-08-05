@@ -76,7 +76,7 @@ class ULBdataLabelled(models.Model):
 
 class Dataset(models.Model):
     File = models.FileField(blank=False, null=False, upload_to='dataset/ulb/')
-    finished = models.BooleanField(default=False)
+    finished = models.BooleanField(default=True)
     def __str__(self):
         return self.File.name
 

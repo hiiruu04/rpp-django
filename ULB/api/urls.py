@@ -1,9 +1,13 @@
 from django.conf.urls import url
-from ULB.api.views import FileUploadView, FileDetail, ApiRoot, ULBLabelList, ULBLabelDetail, ULBLabelListFraud
+from ULB.api.views import FileUploadView, FileDetail, ApiRoot, ULBLabelList, ULBLabelDetail, ULBLabelListFraud, ULBList
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
 urlpatterns = [
+
+    url(r'^list/$',
+    ULBList.as_view(),
+    name=ULBList.name),
 
     url(r'^labeled-list/$',
     ULBLabelList.as_view(),

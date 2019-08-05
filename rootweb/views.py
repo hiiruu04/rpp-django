@@ -7,6 +7,7 @@ from django.views.generic import ListView, CreateView, UpdateView
 from random_forest.models_randomForest import RandomForest
 from ULB.models import Dataset
 from ULB.api.serializers import DatasetSerializers
+from django.core.management import call_command
 
 def index(request):
     return render(request, "index.html", {})
@@ -36,6 +37,7 @@ def changeState(request, *args, **kwargs):
     dataset = Dataset.objects.get(id=kwargs['pk'])
     if dataset.finished == 1:
         dataset.finished = 0
+        call_command('importcommand', dataset.id)
     else:
         dataset.finished = 1
     dataset.save()

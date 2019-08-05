@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, filters, permissions
 from rest_framework.views import APIView
-from ULB.models import ULBdataLabelled, Dataset
-from ULB.api.serializers import ULBLabelledSerializers, DatasetSerializers
+from ULB.models import ULBdataLabelled, Dataset, ULBdata
+from ULB.api.serializers import ULBLabelledSerializers, DatasetSerializers, ULBSerializers
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.parsers import FileUploadParser
@@ -11,15 +11,15 @@ from rest_framework import status
 
 # Create your views here.
 
-# class ULBList(generics.ListCreateAPIView):
-#     queryset = ULBdata.objects.all()
-#     serializer_class = ULBSerializers
-#     name = 'ulb-list'
+class ULBList(generics.ListCreateAPIView):
+    queryset = ULBdata.objects.all()
+    serializer_class = ULBSerializers
+    name = 'ulb-list'
 
-# class ULBDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = ULBdata.objects.all()
-#     serializer_class = ULBSerializers
-#     name = 'ulb-detail'
+class ULBDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ULBdata.objects.all()
+    serializer_class = ULBSerializers
+    name = 'ulb-detail'
 
 class ULBLabelList(generics.ListCreateAPIView):
     queryset = ULBdataLabelled.objects.all()
@@ -51,6 +51,7 @@ class ApiRoot(generics.GenericAPIView):
     name = 'api-ulb-root'
     def get(self, request, *args, **kwargs):
         return Response({
+            ULBList.name: reverse(ULBList.name, request=request),
             ULBLabelList.name: reverse(ULBLabelList.name, request=request),
             ULBLabelListFraud.name: reverse(ULBLabelListFraud.name, request=request),
             FileUploadView.name: reverse(FileUploadView.name, request=request),

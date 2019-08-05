@@ -5,7 +5,7 @@ from asgiref.sync import async_to_sync
 from channels.consumer import AsyncConsumer
 from channels.consumer import SyncConsumer
 import json
-from ULB.models import ULBdataLabelled, Dataset,Models
+from ULB.models import ULBdataLabelled, Dataset, Models, ULBdata
 from ULB.api.serializers import ULBLabelledSerializers, DatasetSerializers
 import random
 from channels.db import database_sync_to_async
@@ -14,6 +14,7 @@ import csv
 import pickle
 from random_forest.models_randomForest import RandomForest
 from django.conf import settings
+from django.core.management import call_command
 
 class StreamingConsumer(AsyncConsumer):
 
@@ -21,7 +22,7 @@ class StreamingConsumer(AsyncConsumer):
         if Dataset.objects.filter(finished=0).exists():
             data = Dataset.objects.filter(finished=0)[0]
             filename = settings.MEDIA_ROOT + '/' + str(data.File.name)
-            dataset = pd.read_csv(filename, delimiter=';')
+            dataset = ULBdata.objects.all()
             dir_file = str(data.File.name)
             return dataset, dir_file
         else:
@@ -36,8 +37,38 @@ class StreamingConsumer(AsyncConsumer):
             model = RandomForest.objects.filter(default_model=True)[0]
         filename_model = settings.MEDIA_ROOT + '/' + str(model.rf_model)
         rf_model = pickle.load(open(filename_model, 'rb'))
-        entry = entry.drop(["Class"], axis=0)
-        Detect = rf_model.predict([entry, ])
+        # entry = entry.drop(["Class"], axis=0)
+        Detect = rf_model.predict([[
+            entry.Time,
+            entry.V1,
+            entry.V2,
+            entry.V3,
+            entry.V4,
+            entry.V5,
+            entry.V6,
+            entry.V7,
+            entry.V8,
+            entry.V9,
+            entry.V10,
+            entry.V11,
+            entry.V12,
+            entry.V13,
+            entry.V14,
+            entry.V15,
+            entry.V16,
+            entry.V17,
+            entry.V18,
+            entry.V19,
+            entry.V20,
+            entry.V21,
+            entry.V22,
+            entry.V23,
+            entry.V24,
+            entry.V25,
+            entry.V26,
+            entry.V27,
+            entry.V28,
+            entry.Amount],])
         new_data = ULBdataLabelled(
             Time = entry.Time,
             V1 = entry.V1,
@@ -76,7 +107,7 @@ class StreamingConsumer(AsyncConsumer):
 
     async def label_data(self, dataset_entries, file_dir):
         if dataset_entries is not None:
-            for index, entry in dataset_entries.iterrows():
+            for entry in dataset_entries:
                 await asyncio.sleep(0.001)
                 new_data = StreamingConsumer.labeling(entry)
                 serialized = ULBLabelledSerializers(new_data)
