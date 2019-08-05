@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Subsistem 3</title>
+    <link rel="stylesheet" type="text/css" href={% static 'css/semantic.min.css' %}>
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script src={% static 'js/semantic.min.js' %}></script>
+    {% comment %} <script src={% static %}></script> {% endcomment %}
+</head>
+<body>
+    <div class="ui top attached demo menu">
+        <a class="item">
+            <i class="sidebar icon"></i>
+            Subsistem III
+        </a>
+        {% block loader %}
+        {% endblock loader %}
+    </div>
+    <div class="ui bottom attached segment pushable">
+        <div class="ui left vertical inverted sidebar labeled icon menu">
+            <a href="{% url 'settings' %}" class="item selected">
+                <i class="terminal icon"></i>
+                Settings
+            </a>
+            <a class="item" href="{% url 'datatest-view' %}">
+                <i class="folder outline icon"></i>
+                Transaction <br> Data <br>
+            </a>
+            <a href="{% url 'predict' %}" class="item">
+                <i class="cogs icon"></i>
+                Fraud<br>Prediction
+            </a>
+            <a href="{% url 'home-rf' %}" class="item">
+                <i class="code icon"></i>
+                Random Forest
+            </a>
+            <a href="{% url 'home-if' %}" class="item">
+                <i class="code icon"></i>
+                Isolation Forest
+            </a>
+            <a href="{% url 'api-ulb-root' %}" class="item">
+                <i class="cloud icon"></i>
+                Api
+            </a>
+        </div>
+        <div class="pusher">
+            <div class="ui basic segment">
+                <p></p>
+                <div class="ui container">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block modal %}
+    {% endblock modal %}
+<script>
+$('.ui.sidebar')
+  .sidebar({
+    dimPage: false,
+    closeable: false,
+    context: $('.bottom.segment')
+  })
+$('.ui.sidebar').sidebar('attach events', '.top.menu .item')
+</script>
+</body>
+</html>

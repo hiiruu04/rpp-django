@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block loader %}
+  <div id="loader" class="ui active inverted dimmer">
+      <div class="ui text loader">Uploading Files</div>
+  </div>
+{% endblock loader %}
+
+
+{% block content %}
+<h3 class="ui header">Settings</h3>
+<div class="ui placeholder segment">
+  <div class="ui two column stackable center aligned grid">
+    <div class="ui vertical divider"></div>
+    <div class="middle aligned row">
+      <div class="column">
+        <div class="ui icon header">
+          <i class="search icon"></i>
+          Select Model
+        </div>
+        <div class="field">
+          <div class="ui search">
+            <div class="ui icon input">
+              <div class="inline">
+                <select name="id" class="ui dropdown" id="select">
+                  <option value="Supervised">Supervised</option>
+                  <option value="Unsupervised">Unsupervised</option>
+                </select>
+                <br><br>
+                <a id='pickleSet' class='ui secondary inverted button'>Simpan</a>
+              </div>
+            </div>
+            <div class="results"></div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui icon header">
+          <i class="world icon"></i>
+          Upload Data Test
+        </div>
+        <form id="formUpload" action="{% url 'file-api' %}" method="POST" enctype='multipart/form-data'>
+          <div id='upload_button' class="ui button input">
+            <input type="file" name="File" id="file">
+          </div>
+          <button class="ui button secondary">Upload</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$('#select').dropdown()
+
+$('#loader').hide()
+
+function hideLoader(){
+  $('#loader').hide()
+}
+
+function showLoader(){
+  $('#loader').show()
+}
+
+var urlUpload = '{% url 'file-api' %}'
+var urlSettings = '{% url 'settings' %}'
+
+$(document).ready(function(){
+  $('#formUpload').submit(function(e){
+    var formData = new FormData($('form').get(0))
+    showLoader();
+    $.ajax({
+      headers: { "X-CSRFToken": '{{csrf_token}}' },
+      type  : $(this).attr('method'),
+      url : urlUpload,
+      data: formData,
+      contentType: false,
+      processData: false,
+      cache : false,
+      success: function(){
+        hideLoader();
+        alert('Data berhasil di upload!');
+        window.location.href= urlSettings;
+      },
+      error: function(jqXHR, textStatus, errorMessage) {
+          console.log(errorMessage); // Optional
+      }
+    })
+    e.preventDefault()
+  })
+
+  $('#pickleSet').click(function(e){
+    $.ajax({
+      headers: { "X-CSRFToken": '{{csrf_token}}' },
+      type : "POST",
+      url : '{% url 'set_pickle' 0 %}'.replace('0', $('#select').dropdown('get value')) ,
+      success: function() { 
+        alert('Berhasil memilih model!');
+        window.location.href= urlSettings;
+      },
+      error: function(jqXHR, textStatus, errorMessage) {
+          console.log(errorMessage); // Optional
+      }
+    })
+  })
+})
+
+
+</script>
+{% endblock content %}

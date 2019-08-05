@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prediction</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
+</head>
+<body>
+<h1 id="message"></h1>
+    <table id="dummy_table" class="table" border="1">
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+        </thead>
+        <tbody>
+        {% for dummy in dummy_list  %}
+            <tr>
+                <td>{{dummy.pk}}</td>
+                <td>{{dummy.name}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</form>
+</body>
+<script>
+    var loc = window.location
+
+    var wsStart = 'ws://'
+    if (loc.protocol == 'https://'){
+        wsStart = 'wss://'
+    }
+    var endpoint = wsStart + loc.host + loc.pathname
+    var socket = new ReconnectingWebSocket(endpoint)
+
+    socket.onmessage = function(e){
+        console.log("message",e)
+    }
+    socket.onopen = function(e){
+        console.log("open",e)
+        
+    }
+
+    socket.onerror = function(e){
+        console.log("error",e)
+    }
+
+    socket.onclose = function(e){
+        console.log("close",e)
+    }
+    
+</script>
+</html>

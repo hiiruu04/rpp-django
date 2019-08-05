@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Upload Dataset</h3>
+<form action="{% url 'file-api' %}" method="POST">
+  <input type="file" name="myFile"><br><br>
+  <input type="submit">
+</form>
+<h3 class="heading">Dataset</h3>
+<table></table>
+<h3 class="heading">ULB Label</h3>
+<table id="dataset" class="ui table stackable">
+    <thead>
+        <th>Time</th>
+        <th>V1</th>
+        <th>V2</th>
+        <th>V3</th>
+        <th>V4</th>
+        <th>V5</th>
+        <th>V6</th>
+        <th>V7</th>
+        <th>V8</th>
+        <th>V9</th>
+        <th>V10</th>
+        <th>V11</th>
+        <th>V12</th>
+        <th>V13</th>
+        <th>V14</th>
+        <th>V15</th>
+        <th>V16</th>
+        <th>V17</th>
+        <th>V18</th>
+        <th>V19</th>
+        <th>V20</th>
+        <th>V21</th>
+        <th>V22</th>
+        <th>V23</th>
+        <th>V24</th>
+        <th>V25</th>
+        <th>V26</th>
+        <th>V27</th>
+        <th>V28</th>
+        <th>Class</th>
+        <th>Timestamps</th>
+    </thead>
+    <tbody>
+    
+    </tbody>
+</table>
+
+{% endblock content %}

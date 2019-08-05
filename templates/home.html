@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3 class="ui heading">Home</h3>
+<div class="ui placeholder segment">
+  <div class="ui two column center aligned grid">
+    <div class="middle aligned row">
+      <div class="column">
+        <div class="ui icon header">
+          <i class="terminal icon"></i>
+          Settings
+        </div>
+        <a href="{% url 'settings' %}">
+          <div class="ui secondary inverted button">
+            Go to Settings
+          </div>
+        </a>
+      </div>
+      <div class="column">
+        <div class="ui icon header">
+          <i class="code icon"></i>
+          Random Forest Modeling
+        </div>
+        <a href="{% url 'home-rf' %}">
+          <div class="ui secondary inverted button">
+            Create Model
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="ui two column center aligned grid">
+    <div class="middle aligned row">
+      <div class="column">
+        <div class="ui icon header">
+          <i class="folder outline icon"></i>
+          Transaction Data
+        </div>
+        <a href="{% url 'datatest-view' %}">
+          <div class="ui secondary inverted button">
+            Go Check
+          </div>
+        </a>
+      </div>
+      <div class="column">
+          <div class="ui icon header">
+            <i class="cogs icon"></i>
+            Predict Fraud
+          </div>
+        <a href="{% url 'predict' %}">
+          <div class="ui secondary inverted button">
+            Let's Predict
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<h3 class="ui heading">API</h3>
+<a href="{% url 'api-ulb-root' %}">Check the API models!</a>
+{% endblock content %}

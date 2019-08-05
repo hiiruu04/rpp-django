@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3 class="ui header">Data Test List</h3>
+<table id="datatest_table" class="ui celled structured table">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama File</th>
+      <th colspan="2" class="center aligned">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if datatests is not None %}
+    {% for datatest in datatests %}
+      <tr>
+          <td>{{datatest.id}}</td>
+          <td>{{datatest.File}}</td>
+          <td class="center aligned"><form action="{% url 'changeState' datatest.pk %}" method="POST">
+          {% csrf_token %}
+            {% if datatest.finished is True %}
+              <button type='submit' class="ui button secondary inverted">Run</button>            
+            {% else %}
+              <button type='submit' class="ui button secondary inverted">Stop</button>                          
+            {% endif %}
+            </form>
+          </td>
+          <td class="center aligned">
+            <button class="ui red button">Delete</button>
+          </td>
+      </tr>
+    {% endfor %}
+  {% endif %}
+  </tbody>
+</table>
+{% endblock content %}
+
+{% block modal %}
+<div id='modal' class="ui basic modal">
+  <div class="ui icon header">
+    <i class="archive icon"></i>
+    <h3>COMING SOON</h3>
+  </div>
+  <div class="content">
+    <p>Apakah anda hanya test modal?</p>
+  </div>
+  <div class="actions">
+    <div class="ui red basic cancel inverted button">
+      <i class="remove icon"></i>
+      No
+    </div>
+    <div class="ui green ok inverted button">
+      <i class="checkmark icon"></i>
+      Yes
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $('.ui.red.button').click(function(){
+    $('#modal').modal('toggle');
+  });
+});
+</script>
+{% endblock modal %}

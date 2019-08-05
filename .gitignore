@@ -1,0 +1,12 @@
+venv/
+rpp.zip
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+env/
+requirements2.txt
+media/
+Procfile
