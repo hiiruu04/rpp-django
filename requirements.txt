@@ -26,7 +26,7 @@ django-cors-headers==3.0.2
 django-crispy-forms==1.7.2
 django-extensions==2.1.9
 django-postgres-copy==2.4.1
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 Flask==1.1.1
 gunicorn==19.9.0
 hiredis==1.0.0
